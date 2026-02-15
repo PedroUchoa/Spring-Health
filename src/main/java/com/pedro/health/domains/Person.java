@@ -1,0 +1,45 @@
+package com.pedro.health.domains;
+
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity(name = "Person")
+@Table(name = "person")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@SQLRestriction(value = "is_active = true")
+public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+    private String name;
+    private String phone;
+    private LocalDate birthDate;
+    @CreationTimestamp
+    private LocalDateTime createdOn;
+    @UpdateTimestamp
+    private LocalDateTime updateOn;
+    private LocalDateTime deletedOn;
+    private Boolean isActive;
+    @OneToMany(mappedBy = "person")
+    private List<Document> documents;
+
+
+    public void disable(){
+        this.setIsActive(false);
+        this.setDeletedOn(LocalDateTime.now());
+        this.getDocuments().forEach(Document::disable);
+    }
+
+}
