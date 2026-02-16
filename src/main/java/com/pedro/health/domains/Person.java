@@ -1,5 +1,8 @@
 package com.pedro.health.domains;
 
+import com.pedro.health.dtos.document.CreateDocumentDto;
+import com.pedro.health.dtos.person.CreatePersonDto;
+import com.pedro.health.dtos.person.UpdatePersonDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,6 +38,13 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Document> documents;
 
+    public Person(CreatePersonDto createPersonDto) {
+        this.name = createPersonDto.name();
+        this.phone = createPersonDto.phone();
+        this.birthDate = createPersonDto.birthDate();
+        this.documents = createPersonDto.documents().stream().map(Document::new).toList();
+    }
+
 
     public void disable(){
         this.setIsActive(false);
@@ -42,4 +52,9 @@ public class Person {
         this.getDocuments().forEach(Document::disable);
     }
 
+    public void update(UpdatePersonDto updatePerson) {
+        this.setName(updatePerson.name());
+        this.setPhone(updatePerson.phone());
+        this.setBirthDate(updatePerson.birthDate());
+    }
 }

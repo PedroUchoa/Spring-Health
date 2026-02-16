@@ -1,6 +1,7 @@
 package com.pedro.health.domains;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.pedro.health.dtos.document.CreateDocumentDto;
 import com.pedro.health.enumerated.DocumentType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,10 +38,19 @@ public class Document {
     @JsonBackReference
     private Person person;
 
+    public Document(CreateDocumentDto createDocumentDto) {
+        this.documentType = createDocumentDto.documentType();
+        this.description = createDocumentDto.description();
+    }
+
     public void disable(){
         this.setIsActive(false);
         this.setDeletedOn(LocalDateTime.now());
     }
 
 
+    public void update(CreateDocumentDto updateDocument) {
+        this.setDocumentType(updateDocument.documentType());
+        this.setDescription(updateDocument.description());
+    }
 }
