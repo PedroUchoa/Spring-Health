@@ -32,10 +32,10 @@ public class Person {
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp
-    private LocalDateTime updateOn;
+    private LocalDateTime updatedOn;
     private LocalDateTime deletedOn;
-    private Boolean isActive;
-    @OneToMany(mappedBy = "person")
+    private Boolean isActive = true;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Document> documents;
 
     public Person(CreatePersonDto createPersonDto) {
@@ -43,6 +43,7 @@ public class Person {
         this.phone = createPersonDto.phone();
         this.birthDate = createPersonDto.birthDate();
         this.documents = createPersonDto.documents().stream().map(Document::new).toList();
+        getDocuments().forEach(document -> document.setPerson(this));
     }
 
 
