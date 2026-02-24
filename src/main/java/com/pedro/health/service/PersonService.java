@@ -5,6 +5,7 @@ import com.pedro.health.domains.Person;
 import com.pedro.health.dtos.person.CreatePersonDto;
 import com.pedro.health.dtos.person.ReturnPersonDto;
 import com.pedro.health.dtos.person.UpdatePersonDto;
+import com.pedro.health.infra.exceptions.person.PersonNotFoundException;
 import com.pedro.health.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,14 +29,14 @@ public class PersonService {
     }
 
     public ReturnPersonDto updatePerson(String personId,UpdatePersonDto updatePerson){
-        Person person = personRepository.getReferenceById(personId);
+        Person person = personRepository.findById(personId).orElseThrow(()->new PersonNotFoundException(personId));
         person.update(updatePerson);
         personRepository.save(person);
         return new ReturnPersonDto(person);
     }
 
     public void deletePerson(String personId){
-        Person person = personRepository.getReferenceById(personId);
+        Person person = personRepository.findById(personId).orElseThrow(()->new PersonNotFoundException(personId));
         person.disable();
         personRepository.save(person);
     }
