@@ -4,8 +4,6 @@ import com.pedro.health.domains.Document;
 import com.pedro.health.domains.Person;
 import com.pedro.health.dtos.document.CreateDocumentDto;
 import com.pedro.health.dtos.document.ReturnDocumentDto;
-import com.pedro.health.dtos.person.ReturnPersonDto;
-import com.pedro.health.dtos.person.UpdatePersonDto;
 import com.pedro.health.enumerated.DocumentType;
 import com.pedro.health.infra.exceptions.document.DocumentNotFoundException;
 import com.pedro.health.infra.exceptions.person.PersonNotFoundException;
@@ -18,10 +16,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,5 @@
 package com.pedro.health.service;
 
-import com.pedro.health.domains.Document;
 import com.pedro.health.domains.Person;
 import com.pedro.health.dtos.person.CreatePersonDto;
 import com.pedro.health.dtos.person.ReturnPersonDto;

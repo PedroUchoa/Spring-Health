@@ -1,12 +1,10 @@
 package com.pedro.health.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pedro.health.domains.Document;
 import com.pedro.health.domains.Person;
 import com.pedro.health.dtos.document.CreateDocumentDto;
 import com.pedro.health.dtos.document.ReturnDocumentDto;
-import com.pedro.health.dtos.person.ReturnPersonDto;
 import com.pedro.health.enumerated.DocumentType;
 import com.pedro.health.infra.exceptions.document.DocumentNotFoundException;
 import com.pedro.health.infra.exceptions.person.PersonNotFoundException;

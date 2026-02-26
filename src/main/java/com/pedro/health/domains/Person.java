@@ -1,6 +1,5 @@
 package com.pedro.health.domains;
 
-import com.pedro.health.dtos.document.CreateDocumentDto;
 import com.pedro.health.dtos.person.CreatePersonDto;
 import com.pedro.health.dtos.person.UpdatePersonDto;
 import jakarta.persistence.*;
